@@ -2,5 +2,9 @@
 <h4>Updated On: <%= @contact.friendly_updated_at %></h4>
 <h2>Email: <%= @contact.email %></h2>
 <h2>Phone: <%= @contact.phone_number %></h2>
+<div>
+  <h2>Bio:</h2>
+  <p><%= @contact.bio %></p>
+</div>
 <%= link_to "Edit", "/contacts/#{@contact.id}/edit", class: "btn btn-info" %>
 <%= link_to "Delete", "/contacts/#{@contact.id}", method: :delete, class: "btn btn-danger" %>
