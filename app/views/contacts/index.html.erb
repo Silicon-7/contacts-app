@@ -4,5 +4,6 @@
     <h2><%= link_to "#{contact.first_name} #{contact.last_name}", "/contacts/#{contact.id}" %></h2>
     <h3>Email: <%= contact.email %></h3>
     <h3>Phone: <%= contact.phone_number %></h3>
+    <h5>User: <%= contact.user.name %></h5>
   </div>
 <% end %>

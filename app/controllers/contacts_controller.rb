@@ -1,6 +1,12 @@
 class ContactsController < ApplicationController
-  def index
-      @contacts = Contact.all
+    def index
+      if current_user
+        @contacts = current_user.contacts
+        render "index.html.erb"
+      else
+        flash[:warning] = 'You must be logged in to see this page'
+        redirect_to '/login'
+      end
     end
 
     def show
@@ -17,7 +23,8 @@ class ContactsController < ApplicationController
                              last_name: params[:last_name], 
                              email: params[:email], 
                              phone_number: params[:phone_number],
-                             bio: params[:bio]
+                             bio: params[:bio],
+                             user_id: current_user.id
                              )
       @contact.save
       flash[:success] = "Contact created."
