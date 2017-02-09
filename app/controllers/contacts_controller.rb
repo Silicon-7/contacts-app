@@ -14,6 +14,7 @@ class ContactsController < ApplicationController
     end
 
     def new
+      @contact = Contact.new
     end
 
     def create
@@ -26,9 +27,12 @@ class ContactsController < ApplicationController
                              bio: params[:bio],
                              user_id: current_user.id
                              )
-      @contact.save
-      flash[:success] = "Contact created."
-      redirect_to "/contacts/#{@contact.id}"
+      if @contact.save
+        flash[:success] = "Contact created."
+        redirect_to "/contacts/#{@contact.id}"
+      else
+        render :new
+      end
     end
 
     def edit
@@ -45,9 +49,12 @@ class ContactsController < ApplicationController
                                  phone_number: params[:phone_number],
                                  bio: params[:bio]
                                  )
-      @contact.save
-      flash[:success] = "Contact updated."
-      redirect_to "/contacts/#{@contact.id}"
+      if @contact.save
+        flash[:success] = "Contact updated."
+        redirect_to "/contacts/#{@contact.id}"
+      else
+        render :edit
+      end
     end
 
     def destroy
